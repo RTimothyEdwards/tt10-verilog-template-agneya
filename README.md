@@ -39,3 +39,9 @@ The GitHub action will automatically build the ASIC files using [OpenLane](https
   - LinkedIn [#tinytapeout](https://www.linkedin.com/search/results/content/?keywords=%23tinytapeout) [@TinyTapeout](https://www.linkedin.com/company/100708654/)
   - Mastodon [#tinytapeout](https://chaos.social/tags/tinytapeout) [@matthewvenn](https://chaos.social/@matthewvenn)
   - X (formerly Twitter) [#tinytapeout](https://twitter.com/hashtag/tinytapeout) [@tinytapeout](https://twitter.com/tinytapeout)
+
+
+### Quick Start Journal (for agneya)
+- remember to `wsl --shutdown`
+- to generate a .vcd, instantiate the virtual python environment `source venv/bin/activate` and run `make -B` in the test folder
+- 
