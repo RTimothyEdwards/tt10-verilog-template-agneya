@@ -9,7 +9,7 @@ from cocotb.triggers import ClockCycles, Timer
 async def test_matrix_mult(dut):
     dut._log.info("Starting matrix multiplication test")
 
-    # cock with 10us period (100 KHz)
+    # clock with 10us period (100 KHz)
     clock = Clock(dut.clk, 10, units="us")
     cocotb.start_soon(clock.start())
 
