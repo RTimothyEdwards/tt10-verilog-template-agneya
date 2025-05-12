@@ -67,12 +67,13 @@ module tt_um_2x2MatrixMult_Vort3xed (
   assign uio_oe[0] = uio_oe_bit0_reg;
 
   // Internal state definitions
-  localparam STATE_WAIT_UART_INPUT    = 3'd0,
-             STATE_COMPUTE            = 3'd1,
-             STATE_LOAD_AND_SEND_UART = 3'd2, // Prepares and starts UART TX for one byte
-             STATE_WAIT_TX_COMPLETE   = 3'd3; // Waits for current UART TX to finish
+localparam STATE_WAIT_UART_INPUT    = 4'd0, // Increased width for new states
+             STATE_COMPUTE            = 4'd1,
+             STATE_LOAD_UART_DATA     = 4'd2, // New state to load data for UART TX
+             STATE_TRIGGER_UART_SEND  = 4'd3, // New state to pulse tx_start
+             STATE_WAIT_TX_COMPLETE   = 4'd4; // Waits for current UART TX to finish
 
-  reg [2:0] state; // Wider state reg if more states
+  reg [3:0] state; // Wider state reg if more states
   reg [2:0] input_byte_counter; // Counts 0-7 for 8 input bytes
   reg [1:0] output_byte_counter; // Counts 0-3 for 4 output bytes (C00, C01, C10, C11)
   
@@ -130,11 +131,11 @@ module tt_um_2x2MatrixMult_Vort3xed (
           C01 <= A0 * B1 + A1 * B3;
           C10 <= A2 * B0 + A3 * B2;
           C11 <= A2 * B1 + A3 * B3;
-          state <= STATE_LOAD_AND_SEND_UART;
+          state <= STATE_LOAD_UART_DATA;
           output_byte_counter <= 0; // Start with the first result byte
         end
 
-        STATE_LOAD_AND_SEND_UART: begin
+        STATE_LOAD_UART_DATA: begin
           uio_oe_bit0_reg <= 1'b1; // Enable UART TX pin output
           case (output_byte_counter)
             2'd0: begin uo_out_reg <= C00[7:0]; uart_tx_data_reg <= C00[7:0]; end
@@ -143,6 +144,13 @@ module tt_um_2x2MatrixMult_Vort3xed (
             2'd3: begin uo_out_reg <= C11[7:0]; uart_tx_data_reg <= C11[7:0]; end
           endcase
           uart_tx_start_pulse <= 1'b1; // Start UART transmission for the loaded byte
+          state <= STATE_TRIGGER_UART_SEND;
+        end
+
+        STATE_TRIGGER_UART_SEND: begin
+          uio_oe_bit0_reg <= 1'b1; // Keep UART TX pin enabled
+          // uart_tx_data_reg is now stable with the correct data from the previous state
+          uart_tx_start_pulse <= 1'b1; // Start UART transmission
           state <= STATE_WAIT_TX_COMPLETE;
         end
 
@@ -156,7 +164,7 @@ module tt_um_2x2MatrixMult_Vort3xed (
               uio_oe_bit0_reg       <= 1'b0; // Disable UART TX pin
             end else begin
               output_byte_counter <= output_byte_counter + 1;
-              state                 <= STATE_LOAD_AND_SEND_UART; // Load and send next byte
+              state                 <= STATE_LOAD_UART_DATA; // Load and send next byte
             end
           end
         end

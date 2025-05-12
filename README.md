@@ -44,4 +44,6 @@ The GitHub action will automatically build the ASIC files using [OpenLane](https
 ### Quick Start Journal (for agneya)
 - remember to `wsl --shutdown`
 - to generate a .vcd, instantiate the virtual python environment `source venv/bin/activate` and run `make -B` in the test folder
-- 
+
+
+![passed uart](image.png)
