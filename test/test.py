@@ -81,12 +81,12 @@ async def test_matrix_mult_uart(dut):
     # The DUT FSM takes 1 cycle to recognize byte_ready, 1 for compute, 1 for first output.
     # So, after the last bit of the stop bit is sent, wait a few cycles.
     # send_uart_byte already includes the stop bit duration.
-    await ClockCycles(dut.clk, 10) # Wait a bit for FSM to transition and output first result
+    await ClockCycles(dut.clk, 2) # Wait a bit for FSM to transition and output first result
 
     for i in range(len(expected_results)):
         # For the first result, it might be ready. For subsequent, wait for next clock.
-        if i > 0:
-             await RisingEdge(dut.clk) # Ensure we sample after potential clock edge update
+        # if i > 0:
+        #      await RisingEdge(dut.clk) # Ensure we sample after potential clock edge update
         # Or simply await ClockCycles(dut.clk, 1) if not the first item.
         # await ClockCycles(dut.clk, 1) # Wait for next output from FSM if not the first one
 
