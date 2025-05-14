@@ -21,15 +21,14 @@ module tt_um_2x2MatrixMult_Vort3xed (
   assign uio_oe[7:1]  = 7'b0;
   
   // UART Configuration
-  localparam SIM_CLOCK_FREQ_HZ = 100_000; // For simulation
-  localparam SIM_BAUD_RATE     = 10_000;  // For simulation
-  localparam CLKS_PER_BIT_FOR_UART = (SIM_CLOCK_FREQ_HZ / SIM_BAUD_RATE);
+  // localparam SIM_CLOCK_FREQ_HZ = 200_000; // For simulation
+  // localparam SIM_BAUD_RATE     = 10_000;  // For simulation
+  // localparam CLKS_PER_BIT_FOR_UART = (SIM_CLOCK_FREQ_HZ / SIM_BAUD_RATE);
 
   // For Arty A7 with 100MHz clock and 115200 Baud:
-  // localparam REAL_CLOCK_FREQ_HZ = 100_000_000;
-  // localparam REAL_BAUD_RATE     = 115200;
-  // localparam CLKS_PER_BIT_FOR_UART = (REAL_CLOCK_FREQ_HZ / REAL_BAUD_RATE);
-
+  localparam REAL_CLOCK_FREQ_HZ = 100_000_000;
+  localparam REAL_BAUD_RATE     = 256000;
+  localparam CLKS_PER_BIT_FOR_UART = (REAL_CLOCK_FREQ_HZ / REAL_BAUD_RATE);
 
   // UART Receiver instance for input
   wire uart_rx_serial_line = ui_in[0]; // Use ui_in[0] as the UART RX pin
