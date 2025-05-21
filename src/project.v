@@ -27,7 +27,7 @@ module tt_um_2x2MatrixMult_Vort3xed (
 
   // For Arty A7 with 100MHz clock and 115200 Baud:
   localparam REAL_CLOCK_FREQ_HZ = 100_000_000;
-  localparam REAL_BAUD_RATE     = 256000;
+  localparam REAL_BAUD_RATE     = 115200;
   localparam CLKS_PER_BIT_FOR_UART = (REAL_CLOCK_FREQ_HZ / REAL_BAUD_RATE);
 
   // UART Receiver instance for input
@@ -67,7 +67,7 @@ module tt_um_2x2MatrixMult_Vort3xed (
   assign uio_oe[0] = uio_oe_bit0_reg;
 
   // Internal state definitions
-localparam STATE_WAIT_UART_INPUT    = 4'd0, // Increased width for new states
+  localparam STATE_WAIT_UART_INPUT    = 4'd0, // Increased width for new states
              STATE_COMPUTE            = 4'd1,
              STATE_LOAD_UART_DATA     = 4'd2, // New state to load data for UART TX
              STATE_TRIGGER_UART_SEND  = 4'd3, // New state to pulse tx_start
