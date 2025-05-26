@@ -1,5 +1,3 @@
-![](../../workflows/gds/badge.svg) ![](../../workflows/docs/badge.svg) ![](../../workflows/test/badge.svg) ![](../../workflows/fpga/badge.svg)
-
 # Tiny Tapeout Verilog Project Template
 
 - [Read the documentation for project](docs/info.md)
@@ -119,7 +117,7 @@ This project focuses on creating a UART-to-SPI interface using Verilog. The desi
   - Add error-checking mechanisms to handle communication failures.
   - Explore extending the design to support additional protocols or higher data rates.
 
-#### USB-to-UART Communication Challenges :((((
+#### USB-to-UART Communication Challenges :
 The USB-to-UART bridge introduces several complexities that must be addressed for reliable data transmission. Key considerations include:
 
 1. **Baud Rate Synchronization**:
@@ -167,3 +165,9 @@ The USB-to-UART bridge introduces several complexities that must be addressed fo
   - Explore adding SPI modes (e.g., Mode 1 or Mode 3) to increase compatibility with different devices.
 
 By addressing these challenges and exploring these optimizations, the UART-to-SPI interface can be made more robust and versatile, paving the way for more complex and high-performance designs.
+
+![schematic](image-1.png)
+
+![big chip](image-2.png)
+
+![chip](image-3.png)
