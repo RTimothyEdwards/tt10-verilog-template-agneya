@@ -7,7 +7,7 @@ from cocotb.triggers import ClockCycles, Timer, RisingEdge, FallingEdge, First
 
 
 CLOCK_FREQ_HZ = 100_000_000  # 100 MHz
-BAUD_RATE = 115200
+BAUD_RATE = 120000
 
 # UART Simulation Parameters
 CYCLES_PER_BIT = int(CLOCK_FREQ_HZ // BAUD_RATE)  # Should match CLKS_PER_BIT_FOR_UART in project.v for sim

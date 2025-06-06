@@ -93,8 +93,8 @@ set_property -dict { PACKAGE_PIN U13   IOSTANDARD LVCMOS33 } [get_ports { uo_out
 #set_property -dict { PACKAGE_PIN G2    IOSTANDARD LVCMOS33 } [get_ports { jd[7] }]; #IO_L15N_T2_DQS_35 Sch=jd[10]
 
 ## USB-UART Interface
-set_property -dict { PACKAGE_PIN D10 IOSTANDARD LVCMOS33 } [get_ports { ui_in[0] }]; # Connect UART RX from FTDI to ui_in[0]
-set_property -dict { PACKAGE_PIN A9 IOSTANDARD LVCMOS33 } [get_ports { uio_inout[0] }]; # Connect UART TX to FTDI to uio_out[0]
+set_property -dict { PACKAGE_PIN D10 IOSTANDARD LVCMOS33 } [get_ports { uio_inout[0] }]; # Connect UART FTDI RX to ui_in[0]
+set_property -dict { PACKAGE_PIN A9 IOSTANDARD LVCMOS33 } [get_ports { ui_in[0] }]; # Connect UART FTDI TX to uio_out[0]
 
 ## ChipKit Outer Digital Header
 # set_property -dict { PACKAGE_PIN V15   IOSTANDARD LVCMOS33 } [get_ports { mprj_io[0]  }]; #IO_L16P_T2_CSI_B_14 Sch=ck_io[0]

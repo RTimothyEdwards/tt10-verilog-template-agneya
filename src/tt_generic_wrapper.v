@@ -62,4 +62,3 @@ module tt_generic_wrapper (
   // end
 
 endmodule
-;
