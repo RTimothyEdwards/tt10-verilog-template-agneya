@@ -1,4 +1,5 @@
-`default_nettype none `timescale 1ns / 1ps
+`default_nettype none 
+`timescale 1ns / 1ps
 
 module uart_receiver_custom #(
     parameter CLKS_PER_BIT = 10  // Number of system clock cycles per UART bit
@@ -59,7 +60,7 @@ module uart_receiver_custom #(
 
         STATE_START_BIT: begin
           // Wait for half a bit time then sample center of start bit
-          if (clk_counter == (CLKS_PER_BIT / 2) - 1) begin
+          if (clk_counter == ($clog2(CLKS_PER_BIT))'((CLKS_PER_BIT / 2) - 1)) begin
             if (!rx_in_synced) begin  // Start bit is valid (still low)
               current_state <= STATE_RX_DATA_BITS;
               clk_counter   <= 0;  // Reset counter for data bit timing
@@ -73,11 +74,11 @@ module uart_receiver_custom #(
 
         STATE_RX_DATA_BITS: begin
           // Sample in the middle of the bit period
-          if (clk_counter == (CLKS_PER_BIT / 2) - 1) begin
+          if (clk_counter == ($clog2(CLKS_PER_BIT))'((CLKS_PER_BIT / 2) - 1)) begin
             rx_buffer[bit_counter] <= rx_in_synced;  // Store LSB first
           end
 
-          if (clk_counter == CLKS_PER_BIT - 1) begin
+          if (clk_counter == ($clog2(CLKS_PER_BIT))'(CLKS_PER_BIT - 1)) begin
             clk_counter <= 0;  // Reset for next bit or state change
             if (bit_counter == 3'd7) begin  // All 8 data bits received
               current_state <= STATE_STOP_BIT;
@@ -91,7 +92,7 @@ module uart_receiver_custom #(
 
         STATE_STOP_BIT: begin
           // Wait for one full bit period for the stop bit
-          if (clk_counter == CLKS_PER_BIT - 1) begin
+          if (clk_counter == ($clog2(CLKS_PER_BIT))'(CLKS_PER_BIT - 1)) begin
             if (rx_in_synced) begin  // Stop bit should be high
               data_out      <= rx_buffer;
               byte_ready    <= 1'b1;

@@ -1,9 +1,13 @@
+`ifndef TT_UM_PROJECT_V
+`define TT_UM_PROJECT_V
+
 /*
  * Copyright (c) 2024 Agneya Tharun 
  * SPDX-License-Identifier: Apache-2.0
  */
 
 `default_nettype none
+`timescale 1ns / 1ps
 
 module tt_um_2x2MatrixMult_Vort3xed (
     input  wire [7:0] ui_in,    // Input for first matrix values (ui_in[0] for UART RX)
@@ -206,3 +210,5 @@ module tt_um_2x2MatrixMult_Vort3xed (
   wire _unused = &{ena, ui_in[7:1], uio_in};
 
 endmodule
+
+`endif // TT_UM_PROJECT_V

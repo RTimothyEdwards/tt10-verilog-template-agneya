@@ -13,7 +13,7 @@
  */
 
 // Point this to the Tiny Tapeout project and uncomment
-// `include "../src/tt_um_project.v"
+`include "../src/project.v"
 
 // Note that this creates new signal name "uio_inout" which is
 // what must be connected to the eight pins in the "JB" PMOD
@@ -41,7 +41,8 @@ module tt_generic_wrapper (
       .uio_out(uio_out),  // 8-bit bidirectional (out)
       .uio_oe(uio_oe),  // 8-bit bidirectional (enable)
       .clk(clk),
-      .rst_n(rst_n)  // inverted reset
+      .rst_n(rst_n),  // inverted reset
+      .ena(1'b1)  // always enabled
   );
 
   // Handle bidirectional I/Os

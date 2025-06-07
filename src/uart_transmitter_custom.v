@@ -1,4 +1,5 @@
-`default_nettype none `timescale 1ns / 1ps
+`default_nettype none
+`timescale 1ns / 1ps
 
 module uart_transmitter_custom #(
     parameter CLKS_PER_BIT = 10  // Number of system clock cycles per UART bit
@@ -49,7 +50,7 @@ module uart_transmitter_custom #(
 
         STATE_START_BIT: begin
           tx_serial_out_reg <= 1'b0;  // Transmit Start bit (low)
-          if (clk_counter == CLKS_PER_BIT - 1) begin
+          if (clk_counter == ($clog2(CLKS_PER_BIT))'(CLKS_PER_BIT - 1)) begin
             clk_counter <= 0;
             current_state <= STATE_TX_DATA_BITS;
             // Prepare first data bit (LSB)
@@ -61,7 +62,7 @@ module uart_transmitter_custom #(
 
         STATE_TX_DATA_BITS: begin
           // Current bit is already on tx_serial_out_reg from previous state or previous cycle
-          if (clk_counter == CLKS_PER_BIT - 1) begin
+          if (clk_counter == ($clog2(CLKS_PER_BIT))'(CLKS_PER_BIT - 1)) begin
             clk_counter <= 0;
             if (bit_counter == 3'd7) begin  // All 8 data bits sent
               current_state <= STATE_STOP_BIT;
@@ -77,7 +78,7 @@ module uart_transmitter_custom #(
 
         STATE_STOP_BIT: begin
           tx_serial_out_reg <= 1'b1;  // Transmit Stop bit (high)
-          if (clk_counter == CLKS_PER_BIT - 1) begin
+          if (clk_counter == ($clog2(CLKS_PER_BIT))'(CLKS_PER_BIT - 1)) begin
             clk_counter   <= 0;
             current_state <= STATE_IDLE;
             // tx_busy will be set to 0 in IDLE state on the next cycle
