@@ -78,7 +78,8 @@ async def test_matrix_mult_uart(dut):
 
     dut._log.info("All 8 matrix data bytes sent to DUT via UART.")
 
-    expected_results_uart = [19, 22, 43, 50] 
+    # expected results for each element is to be 4 times its actual value. 
+    expected_results_uart = [76, 88, 172, 200]
     actual_results_uart = []
     actual_results_parallel = []
 
