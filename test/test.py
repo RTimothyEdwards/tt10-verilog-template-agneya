@@ -6,8 +6,10 @@ from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles, Timer, RisingEdge, FallingEdge, First
 
 
-CLOCK_FREQ_HZ = 100_000_000  # 100 MHz
-BAUD_RATE = 120000
+// Use 100MHz for Arty A7 FPGA board, 50MHz for Tiny Tapeout board
+// CLOCK_FREQ_HZ = 100_000_000  # 100 MHz
+CLOCK_FREQ_HZ = 50_000_000  # 100 MHz
+BAUD_RATE = 115200
 
 # UART Simulation Parameters
 CYCLES_PER_BIT = int(CLOCK_FREQ_HZ // BAUD_RATE)  # Should match CLKS_PER_BIT_FOR_UART in project.v for sim

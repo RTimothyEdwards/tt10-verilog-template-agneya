@@ -29,9 +29,14 @@ module tt_um_2x2MatrixMult_Vort3xed (
   // localparam SIM_BAUD_RATE     = 10_000;  // For simulation
   // localparam CLKS_PER_BIT_FOR_UART = (SIM_CLOCK_FREQ_HZ / SIM_BAUD_RATE);
 
-  // For Arty A7 with 100MHz clock and 120000 Baud:
-  localparam REAL_CLOCK_FREQ_HZ = 100_000_000;
-  localparam REAL_BAUD_RATE = 120000;
+  // For Arty A7 with 100MHz clock and 115200 Baud:
+  // localparam REAL_CLOCK_FREQ_HZ = 100_000_000;
+  // localparam REAL_BAUD_RATE = 115200;
+
+  // For Tiny Tapeout with 50MHz clock and 115200 Baud:
+  localparam REAL_CLOCK_FREQ_HZ = 50_000_000;
+  localparam REAL_BAUD_RATE = 115200;
+
   localparam CLKS_PER_BIT_FOR_UART = (REAL_CLOCK_FREQ_HZ / REAL_BAUD_RATE);
 
   //print out the CLKS_PER_BIT_FOR_UART value
