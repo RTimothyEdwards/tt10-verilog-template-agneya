@@ -6,8 +6,8 @@ from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles, Timer, RisingEdge, FallingEdge, First
 
 
-// Use 100MHz for Arty A7 FPGA board, 50MHz for Tiny Tapeout board
-// CLOCK_FREQ_HZ = 100_000_000  # 100 MHz
+# Use 100MHz for Arty A7 FPGA board, 50MHz for Tiny Tapeout board
+# CLOCK_FREQ_HZ = 100_000_000  # 100 MHz
 CLOCK_FREQ_HZ = 50_000_000  # 100 MHz
 BAUD_RATE = 115200
 
